@@ -13,4 +13,25 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, enigma
   end
 
-end 
+  def test_it_can_encrypt
+    skip
+    enigma = Enigma.new
+    assert_equal ({
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+      }),
+      enigma.encrypt("hello world", "02715", "040895")
+  end
+
+  def test_it_can_decrypt
+  skip
+  enigma = Enigma.new
+  assert_equal ({
+    decryption: "hello world",
+    key: "02715",
+    date: "040895"
+    }), enigma.decrypt("keder ohulw", "02715", "040895")
+  end 
+
+end

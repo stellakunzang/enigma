@@ -31,10 +31,7 @@ class OffsetTest < Minitest::Test
 
   def test_it_can_generate_offsets_from_date
     offset = Offset.new("040895")
-    assert_equal 1, offset.a
-    assert_equal 0, offset.b
-    assert_equal 2, offset.c
-    assert_equal 5, offset.d
+    assert_equal [1, 0, 2, 5], offset.offsets 
   end
 
 end

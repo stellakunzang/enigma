@@ -1,8 +1,10 @@
 require_relative "defaultable"
+require_relative "abcdable"
 
 class Shift
 
   include Defaultable
+  include Abcdable
 
   attr_reader :text, :key, :date, :date_squared, :last_four, :alphabet, :shifts
 
@@ -15,38 +17,6 @@ class Shift
     @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
     @alphabet_index ||= alphabet_index
     @shifts = get_shifts
-  end
-
-  def offsets
-    offsets = @last_four.split("")
-    offsets.map {|number| number.to_i}
-  end
-
-  def a
-    @key[0..1].to_i
-  end
-
-  def b
-    @key[1..2].to_i
-  end
-
-  def c
-    @key[2..3].to_i
-  end
-
-  def d
-    @key[3..4].to_i
-  end
-
-  def keys
-    [a, b, c, d]
-  end
-
-  def get_shifts
-    key_offset_pairs = keys.zip(offsets)
-    @shifts = key_offset_pairs.map do |pair|
-      pair.sum
-    end
   end
 
   def encrypt_message

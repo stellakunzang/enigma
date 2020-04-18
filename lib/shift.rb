@@ -1,16 +1,54 @@
 class Shift
 
-  attr_reader :text, :key, :date, :alphabet, :keys, :offsets
+  attr_reader :text, :key, :date, :date_squared, :alphabet, :shifts 
 
-  def initialize(text, key = nil, date = nil)
+  def initialize(text, number = randomize , date = today)
     @text = text.downcase
-    @key = key
+    @key ||= number.to_s
     @date = date
+    @date_squared ||= square_date(date).to_s
+    @last_four = @date_squared[-4..-1]
     @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
     @alphabet_index ||= alphabet_index
-    @keys = nil
-    @offsets = nil
-    @shifts = nil
+    @shifts = get_shifts
+  end
+
+  def randomize
+    rand(5 ** 5).to_s.rjust(5, '0')
+  end
+
+  def today
+    (Date.today.strftime("%d%m%y")).to_s
+  end
+
+  def square_date(date)
+    date = date.to_i
+    date * date
+  end
+
+  def offsets
+    offsets = @last_four.split("")
+    offsets.map {|number| number.to_i}
+  end
+
+  def a
+    @key[0..1].to_i
+  end
+
+  def b
+    @key[1..2].to_i
+  end
+
+  def c
+    @key[2..3].to_i
+  end
+
+  def d
+    @key[3..4].to_i
+  end
+
+  def keys
+    [a, b, c, d]
   end
 
   def alphabet_index
@@ -21,39 +59,14 @@ class Shift
     alphabet_with_index
   end
 
-  def get_keys(key)
-    if key == nil
-      cypher_key = Key.new
-    else
-      cypher_key = Key.new(key)
-    end
-    @keys = cypher_key.keys
-  end
-
-  def get_offsets(date)
-    if date == nil
-      offset = Offset.new
-    else
-      offset = Offset.new(date)
-    end
-    @offsets = offset.offsets
-  end
-
   def get_shifts
-    key_offset_pairs = @keys.zip(@offsets)
+    key_offset_pairs = keys.zip(offsets)
     @shifts = key_offset_pairs.map do |pair|
       pair.sum
     end
   end
 
-  def initialize_encryption
-    get_keys(@key)
-    get_offsets(@date)
-    get_shifts
-  end
-
   def encrypt_message
-    initialize_encryption
     shift_a = @shifts[0]
     shift_b = @shifts[1]
     shift_c = @shifts[2]

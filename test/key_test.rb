@@ -23,4 +23,22 @@ class KeyTest < Minitest::Test
     num = key.randomize
     assert_equal true, num.length  == 5
   end
+
+  def test_it_can_generate_keys_from_number
+    key = Key.new("02715")
+    assert_equal 02, key.a
+    assert_equal 27, key.b
+    assert_equal 71, key.c
+    assert_equal 15, key.d
+  end
+
+  def test_it_can_generate_keys_from_random_number
+    key = Key.new
+    key.stubs(:number).returns("02715")
+    assert_equal 02, key.a
+    assert_equal 27, key.b
+    assert_equal 71, key.c
+    assert_equal 15, key.d
+  end
+
 end

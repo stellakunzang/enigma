@@ -59,7 +59,7 @@ class ShiftTest < Minitest::Test
   def test_it_can_get_last_four_digits
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal "1025", shift.last_four
-  end 
+  end
 
   def test_it_can_get_today_date
     shift = Shift.new("Hello World")
@@ -82,6 +82,11 @@ class ShiftTest < Minitest::Test
   def test_it_can_encrypt_text
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal "keder ohulw", shift.encrypt_message
+  end
+
+  def test_it_can_encrypt_text_with_punctuation
+    shift = Shift.new("Hello World!", "02715", "040895")
+    assert_equal "keder ohulw!", shift.encrypt_message
   end
 
   def test_it_can_create_hash_of_alphabet_with_index

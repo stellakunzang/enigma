@@ -46,7 +46,14 @@ class Shift
     end
   end
 
+  def initialize_encryption
+    get_keys(@key)
+    get_offsets(@date)
+    get_shifts
+  end
+
   def encrypt_message
+    initialize_encryption
     shift_a = @shifts[0]
     shift_b = @shifts[1]
     shift_c = @shifts[2]

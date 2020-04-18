@@ -3,6 +3,7 @@ class Offset
 
   def initialize(date = today)
     @date_squared ||= square_date(date).to_s
+    @last_four = @date_squared[-4..-1]
   end
 
   def today
@@ -14,24 +15,9 @@ class Offset
     date * date
   end
 
-  def a
-    date_squared[-4].to_i
-  end
-
-  def b
-    date_squared[-3].to_i
-  end
-
-  def c
-    date_squared[-2].to_i
-  end
-
-  def d
-    date_squared[-1].to_i
-  end
-
   def offsets
-    [a, b, c, d]
+    offsets = @last_four.split("")
+    offsets.map {|number| number.to_i}
   end
 
 end

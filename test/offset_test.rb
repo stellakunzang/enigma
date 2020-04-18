@@ -17,5 +17,10 @@ class OffsetTest < Minitest::Test
     offset = Offset.new("040895")
     assert_equal "1672401025", offset.date_squared
   end
-  
+
+  def test_it_has_today
+    offset = Offset.new
+    assert_equal true, offset.today.length == 6
+  end
+
 end

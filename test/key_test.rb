@@ -12,4 +12,15 @@ class KeyTest < Minitest::Test
     key = Key.new
     assert_instance_of Key, key
   end
-end 
+
+  def test_it_can_take_an_argument
+    key = Key.new(14825)
+    assert_equal "14825", key.number
+  end
+
+  def test_it_can_randomize
+    key = Key.new
+    num = key.randomize
+    assert_equal true, num.length  == 5
+  end
+end

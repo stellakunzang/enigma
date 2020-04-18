@@ -17,7 +17,7 @@ class ShiftTest < Minitest::Test
 
   def test_it_has_attributes
     shift = Shift.new("Hello World", "02715", "040895")
-    assert_equal "Hello World", shift.text
+    assert_equal "hello world", shift.text
     assert_equal "02715", shift.key
     assert_equal "040895", shift.date
     assert_equal ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "], shift.alphabet
@@ -67,7 +67,7 @@ class ShiftTest < Minitest::Test
     shift.get_keys("02715")
     shift.get_offsets("040895")
     shift.get_shifts
-    assert_equal "keder ohulw", shift.encrypt_message("Hello World")
+    assert_equal "keder ohulw", shift.encrypt_message
   end
 
   def test_it_can_create_hash_of_alphabet_with_index

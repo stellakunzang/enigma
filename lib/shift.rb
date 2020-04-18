@@ -31,6 +31,11 @@ class Shift
   end
 
   def get_shifts
+    key_offset_pairs = @keys.zip(@offsets)
+    shifts = key_offset_pairs.map do |pair|
+      pair.sum
+    end
+    shifts 
   end
 
 

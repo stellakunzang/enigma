@@ -1,24 +1,20 @@
+require_relative "defaultable"
+
 class Shift
 
-  attr_reader :text, :key, :date, :date_squared, :alphabet, :shifts 
+  include Defaultable
 
-  def initialize(text, number = randomize , date = today)
+  attr_reader :text, :key, :date, :date_squared, :alphabet, :shifts
+
+  def initialize(text, key = randomize, date = today)
     @text = text.downcase
-    @key ||= number.to_s
+    @key ||= key.to_s
     @date = date
     @date_squared ||= square_date(date).to_s
     @last_four = @date_squared[-4..-1]
     @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
     @alphabet_index ||= alphabet_index
     @shifts = get_shifts
-  end
-
-  def randomize
-    rand(5 ** 5).to_s.rjust(5, '0')
-  end
-
-  def today
-    (Date.today.strftime("%d%m%y")).to_s
   end
 
   def square_date(date)

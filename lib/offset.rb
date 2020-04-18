@@ -9,4 +9,9 @@ class Offset
     (Date.today.strftime("%d%m%y")).to_s
   end
 
-end 
+  def square_date(date)
+    date = date.to_i
+    date * date
+  end
+
+end

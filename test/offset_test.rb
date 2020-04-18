@@ -12,4 +12,10 @@ class OffsetTest < Minitest::Test
     offset = Offset.new
     assert_instance_of Offset, offset
   end
-end 
+
+  def test_it_has_attributes
+    offset = Offset.new("040895")
+    assert_equal "1672401025", offset.date_squared
+  end
+  
+end

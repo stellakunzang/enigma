@@ -26,6 +26,12 @@ class EnigmaTest < Minitest::Test
       enigma.encrypt("Hello World", "02715", "040895")
   end
 
+  def test_it_can_encrypt_without_key_and_date
+    enigma = Enigma.new
+    assert_instance_of Hash, enigma.encrypt("Hello World")
+    assert_equal 3, enigma.encrypt("Hello World").length 
+  end
+
   def test_it_can_decrypt
   skip
   enigma = Enigma.new

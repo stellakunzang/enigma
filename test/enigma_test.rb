@@ -32,6 +32,16 @@ class EnigmaTest < Minitest::Test
     assert_equal 3, enigma.encrypt("Hello World").length
   end
 
+  def test_it_can_encrypt_punctuation
+    enigma = Enigma.new
+    assert_equal ({
+      encryption: "keder ohulw!",
+      key: "02715",
+      date: "040895"
+      }),
+      enigma.encrypt("Hello World!", "02715", "040895")
+  end
+
   def test_it_can_decrypt
   skip
   enigma = Enigma.new

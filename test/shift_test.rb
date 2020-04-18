@@ -52,12 +52,14 @@ class ShiftTest < Minitest::Test
     shift.get_keys("02715")
     shift.get_offsets("040895")
     assert_equal [02, 27, 71, 15], shift.keys
-    assert_equal [1, 0, 2, 5], shift.offsets 
+    assert_equal [1, 0, 2, 5], shift.offsets
   end
 
   def test_it_can_get_shifts
-    skip
-    assert_equal [3, 27, 73, 20], shift.shifts
+    shift = Shift.new("Hello World", "02715", "040895")
+    shift.get_keys("02715")
+    shift.get_offsets("040895")
+    assert_equal [3, 27, 73, 20], shift.get_shifts
   end
 
 end

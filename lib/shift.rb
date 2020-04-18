@@ -17,11 +17,6 @@ class Shift
     @shifts = get_shifts
   end
 
-  def square_date(date)
-    date = date.to_i
-    date * date
-  end
-
   def offsets
     offsets = @last_four.split("")
     offsets.map {|number| number.to_i}
@@ -45,14 +40,6 @@ class Shift
 
   def keys
     [a, b, c, d]
-  end
-
-  def alphabet_index
-    alphabet_with_index = {}
-    @alphabet.to_enum.with_index do |letter, index|
-      alphabet_with_index[letter] = index
-    end
-    alphabet_with_index
   end
 
   def get_shifts
@@ -83,7 +70,7 @@ class Shift
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
         encrypted_message << letter
-      else 
+      else
         if index == index_a
           new_letter = alphabet_a[@alphabet_index[letter]]
           encrypted_message << new_letter

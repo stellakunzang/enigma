@@ -4,7 +4,7 @@ class Shift
 
   include Defaultable
 
-  attr_reader :text, :key, :date, :date_squared, :alphabet, :shifts
+  attr_reader :text, :key, :date, :date_squared, :last_four, :alphabet, :shifts
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase
@@ -81,22 +81,26 @@ class Shift
 
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
-      if index == index_a
-        new_letter = alphabet_a[@alphabet_index[letter]]
-        encrypted_message << new_letter
-        index_a += 4
-      elsif index == index_b
-        new_letter = alphabet_b[@alphabet_index[letter]]
-        encrypted_message << new_letter
-        index_b += 4
-      elsif index == index_c
-        new_letter = alphabet_c[@alphabet_index[letter]]
-        encrypted_message << new_letter
-        index_c += 4
-      elsif index == index_d
-        new_letter = alphabet_d[@alphabet_index[letter]]
-        encrypted_message << new_letter
-        index_d += 4
+      if !alphabet.include?(letter)
+        encrypted_message << letter
+      else 
+        if index == index_a
+          new_letter = alphabet_a[@alphabet_index[letter]]
+          encrypted_message << new_letter
+          index_a += 4
+        elsif index == index_b
+          new_letter = alphabet_b[@alphabet_index[letter]]
+          encrypted_message << new_letter
+          index_b += 4
+        elsif index == index_c
+          new_letter = alphabet_c[@alphabet_index[letter]]
+          encrypted_message << new_letter
+          index_c += 4
+        elsif index == index_d
+          new_letter = alphabet_d[@alphabet_index[letter]]
+          encrypted_message << new_letter
+          index_d += 4
+        end
       end
     end
     encrypted_message.join

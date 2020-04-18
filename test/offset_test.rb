@@ -29,4 +29,12 @@ class OffsetTest < Minitest::Test
     assert_equal true, offset.date_squared == (number * number).to_s
   end
 
+  def test_it_can_generate_offsets_from_date
+    offset = Offset.new("040895")
+    assert_equal 1, offset.a
+    assert_equal 0, offset.b
+    assert_equal 2, offset.c
+    assert_equal 5, offset.d
+  end
+
 end

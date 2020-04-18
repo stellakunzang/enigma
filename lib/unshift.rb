@@ -19,9 +19,48 @@ class Unshift
     @unshifts = get_shifts
   end
 
+  def decrypt_message
+    shift_a = - (@shifts[0])
+    shift_b = - (@shifts[1])
+    shift_c = - (@shifts[2])
+    shift_d = - (@shifts[3])
+    index_a = 0
+    index_b = 1
+    index_c = 2
+    index_d = 3
 
+    alphabet_a = alphabet.rotate(shift_a)
+    alphabet_b = alphabet.rotate(shift_b)
+    alphabet_c = alphabet.rotate(shift_c)
+    alphabet_d = alphabet.rotate(shift_d)
 
-# need to use same keys and offsets to shift in the opposite direction
-# this can be accomplished by calling rotate with the same number as shift, but adding a "-" to the front of each
+    decrypted_message = []
+
+    raw_text = @text.split("").to_enum
+    raw_text.with_index do |letter, index|
+      if !alphabet.include?(letter)
+        encrypted_message << letter
+      else
+        if index == index_a
+          new_letter = alphabet_a[@alphabet_index[letter]]
+          decrypted_message << new_letter
+          index_a += 4
+        elsif index == index_b
+          new_letter = alphabet_b[@alphabet_index[letter]]
+          decrypted_message << new_letter
+          index_b += 4
+        elsif index == index_c
+          new_letter = alphabet_c[@alphabet_index[letter]]
+          decrypted_message << new_letter
+          index_c += 4
+        elsif index == index_d
+          new_letter = alphabet_d[@alphabet_index[letter]]
+          decrypted_message << new_letter
+          index_d += 4
+        end
+      end
+    end
+    decrypted_message.join
+  end
 
 end

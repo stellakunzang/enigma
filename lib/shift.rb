@@ -1,23 +1,33 @@
 class Shift
 
-  attr_reader :keys, :offsets, :shifts
+  attr_reader :text, :key, :date
 
-  def initialize(text, key, date)
+  def initialize(text, key = nil, date = nil)
     @text = text
-    @key = Keys.new(@key)
-    @date = Offset.new(@date)
-    @keys ||= generate_keys
-    @offsets ||= generate_offsets
-    @alphabet = alphabet
-    @shift = calculate_shift
+    @key = key
+    @date = date
   end
 
-  def generate_keys
-    @key.keys
+  def get_keys(key)
+    if key == nil
+      cypher_key = Key.new
+    else
+      cypher_key = Key.new(key)
+    end
+    cypher_key.keys
   end
 
-  def generate_offsets
-    @date.offsets
+  def get_offsets(date)
+    if date == nil
+      offset = Offset.new
+    else
+      offset = Offset.new(date)
+    end
+    offset.offsets
+  end
+
+  def alphabet
+    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
   end
 
 end

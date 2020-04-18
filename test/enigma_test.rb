@@ -5,8 +5,8 @@ require "minitest/pride"
 require "pry"
 require "./lib/enigma"
 require "./lib/shift"
-require "./lib/offset"
-require "./lib/key"
+require "Date"
+require "./lib/defaultable"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test
@@ -29,7 +29,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_encrypt_without_key_and_date
     enigma = Enigma.new
     assert_instance_of Hash, enigma.encrypt("Hello World")
-    assert_equal 3, enigma.encrypt("Hello World").length 
+    assert_equal 3, enigma.encrypt("Hello World").length
   end
 
   def test_it_can_decrypt

@@ -28,7 +28,7 @@ class Enigma
 
   def decrypt(text, key, date = today)
     data = Hash.new
-    data[:encryption] = unscrambled_text
+    data[:decryption] = shift.decrypt_message
     data[:key] = key
     data[:date] = date
     return data

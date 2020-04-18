@@ -56,9 +56,15 @@ class ShiftTest < Minitest::Test
     assert_equal true, shift.date_squared == (number * number).to_s
   end
 
+  def test_it_can_get_last_four_digits
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal "1025", shift.last_four
+  end 
+
   def test_it_can_get_today_date
     shift = Shift.new("Hello World")
-    assert_equal true, shift.today.length == 6
+    shift.stubs(:today).returns("180420")
+    assert_equal "180420", shift.today
   end
 
   def test_it_can_get_offsets_today

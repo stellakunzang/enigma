@@ -3,7 +3,7 @@ class Shift
   attr_reader :text, :key, :date, :alphabet, :keys, :offsets
 
   def initialize(text, key = nil, date = nil)
-    @text = text
+    @text = text.downcase
     @key = key
     @date = date
     @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
@@ -46,7 +46,14 @@ class Shift
     end
   end
 
-  def encrypt_message(text)
+  def initialize_encryption
+    get_keys(@key)
+    get_offsets(@date)
+    get_shifts
+  end
+
+  def encrypt_message
+    initialize_encryption
     shift_a = @shifts[0]
     shift_b = @shifts[1]
     shift_c = @shifts[2]
@@ -63,7 +70,7 @@ class Shift
 
     encrypted_message = []
 
-    raw_text = text.downcase.split("").to_enum
+    raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if index == index_a
         new_letter = alphabet_a[@alphabet_index[letter]]

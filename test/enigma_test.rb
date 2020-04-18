@@ -4,6 +4,9 @@ require "minitest/autorun"
 require "minitest/pride"
 require "pry"
 require "./lib/enigma"
+require "./lib/shift"
+require "./lib/offset"
+require "./lib/key"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test
@@ -14,14 +17,13 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt
-    skip
     enigma = Enigma.new
     assert_equal ({
       encryption: "keder ohulw",
       key: "02715",
       date: "040895"
       }),
-      enigma.encrypt("hello world", "02715", "040895")
+      enigma.encrypt("Hello World", "02715", "040895")
   end
 
   def test_it_can_decrypt
@@ -32,6 +34,6 @@ class EnigmaTest < Minitest::Test
     key: "02715",
     date: "040895"
     }), enigma.decrypt("keder ohulw", "02715", "040895")
-  end 
+  end
 
 end

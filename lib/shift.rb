@@ -11,4 +11,13 @@ class Shift
     @alphabet = alphabet
     @shift = calculate_shift
   end
-end 
+
+  def generate_keys
+    @key.keys
+  end
+
+  def generate_offsets
+    @date.offsets
+  end
+
+end

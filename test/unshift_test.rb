@@ -29,4 +29,9 @@ class UnshiftTest < Minitest::Test
     assert_equal [1, 0, 2, 5], unshift.offsets
   end
 
+  def test_it_can_encrypt_text
+    unshift = Unshift.new("keder ohulw", "02715", "040895")
+    assert_equal "hello world", unshift.decrypt_message
+  end
+
 end

@@ -23,4 +23,10 @@ class OffsetTest < Minitest::Test
     assert_equal true, offset.today.length == 6
   end
 
+  def test_it_can_square_today_date
+    offset = Offset.new
+    number = offset.today.to_i
+    assert_equal true, offset.date_squared == (number * number).to_s
+  end
+
 end

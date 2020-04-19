@@ -6,7 +6,14 @@ class Shift
   include Defaultable
   include Abcdable
 
-  attr_reader :text, :key, :date, :date_squared, :last_four, :shifts, :indexes, :encrypted_message
+  attr_reader :text,
+              :key,
+              :date,
+              :date_squared,
+              :last_four,
+              :shifts,
+              :indexes,
+              :encrypted_message, :decrypted_message
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase
@@ -19,6 +26,7 @@ class Shift
     @shifts = get_shifts
     @indexes = set_indexes
     @encrypted_message = [].join
+    @decrypted_message = [].join
   end
 
   def turn(position, letter)
@@ -50,7 +58,7 @@ class Shift
   def reverse(position, letter)
     local_alphabet = @alphabet.rotate(neg_shifts_pairs[position.to_sym])
     new_letter = local_alphabet[@alphabet_index[letter]]
-    @encrypted_message << new_letter
+    @decrypted_message << new_letter
     @indexes[position.to_sym] += 4
   end
 
@@ -58,7 +66,7 @@ class Shift
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
-        @encrypted_message << letter
+        @decrypted_message << letter
       else
         if index == @indexes[:a]
           reverse("a", letter)

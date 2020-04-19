@@ -20,6 +20,10 @@ class DecryptTest < Minitest::Test
     assert_equal "hello world", decrypt.text
     assert_equal "02715", decrypt.key
     assert_equal "040895", decrypt.date
+  end
+
+  def test_it_has_alphabet
+    decrypt = Decrypt.new("Hello World", "02715", "040895")
     assert_equal ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "], decrypt.alphabet
   end
 
@@ -33,26 +37,28 @@ class DecryptTest < Minitest::Test
     assert_equal [02, 27, 71, 15], decrypt.keys
   end
 
-  def test_it_can_get_randomized_keys
+  def test_it_can_get_keys_from_randomized_key
     decrypt = Decrypt.new("Hello World")
     assert_equal 4, decrypt.keys.length
     assert_instance_of Array, decrypt.keys
   end
 
-  def test_it_can_get_offsets
-    decrypt = Decrypt.new("Hello World", "02715", "040895")
-    assert_equal [1, 0, 2, 5], decrypt.offsets
-  end
-
   def test_date_squared
-    decrypt = Decrypt.new("Hello World", "02715", "040895")
+    decrypt = Decrypt.new("Hello World","02715", "040895")
     assert_equal "1672401025", decrypt.date_squared
   end
 
-  def test_today_squared
+  def test_it_can_get_today_date
     decrypt = Decrypt.new("Hello World")
-    number = decrypt.today.to_i
-    assert_equal true, decrypt.date_squared == (number * number).to_s
+    assert_equal true, decrypt.today.length == 6
+    assert_equal true, decrypt.today.class == String
+  end
+
+  def test_today_squared
+    Date.stubs(:today).returns(Date.new(2020, 04, 18))
+    decrypt = Decrypt.new("Hello World")
+    assert_equal "180420", decrypt.date
+    assert_equal "32551376400", decrypt.date_squared
   end
 
   def test_it_can_get_last_four_digits
@@ -60,10 +66,15 @@ class DecryptTest < Minitest::Test
     assert_equal "1025", decrypt.last_four("040895")
   end
 
-  def test_it_can_get_today_date
+  def test_it_can_get_offsets
+    decrypt = Decrypt.new("Hello World", "02715", "040895")
+    assert_equal [1, 0, 2, 5], decrypt.offsets
+  end
+
+  def test_it_can_get_offsets_from_today
     decrypt = Decrypt.new("Hello World")
-    decrypt.stubs(:today).returns("180420")
-    assert_equal "180420", decrypt.today
+    Date.stubs(:today).returns(Date.new(2020, 04, 18))
+    assert_equal [6, 4, 0, 0], decrypt.offsets
   end
 
   def test_it_can_get_shifts
@@ -85,6 +96,12 @@ class DecryptTest < Minitest::Test
     decrypt = Decrypt.new("keder ohulw", "02715", "040895")
     decrypt.decrypt_message
     assert_equal "hello world", decrypt.decrypted_message
+  end
+
+  def test_it_can_decrypt_text_with_punctuation
+    decrypt = Decrypt.new("keder ohulw!", "02715", "040895")
+    decrypt.decrypt_message
+    assert_equal "hello world!", decrypt.decrypted_message
   end
 
   def test_it_can_create_hash_of_alphabet_with_index

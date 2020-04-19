@@ -28,7 +28,7 @@ class DecryptTest < Minitest::Test
   end
 
   def test_it_can_randomize_key
-    decrypt = Decrypt.new("Hello World", "02715", "040895")
+    decrypt = Decrypt.new("Hello World")
     assert_equal true, decrypt.key.length == 5
   end
 

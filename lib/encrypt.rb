@@ -15,19 +15,16 @@ class Encrypt < Shift
     @key = super
     @date = super
     @shifts = super
-    @alphabet_index = alphabet_index
     @indexes = set_indexes
     @encrypted_message = [].join
   end
 
   def turn(position, letter)
     local_alphabet = alphabet.rotate(shifts_pairs[position.to_sym])
-    new_letter = local_alphabet[@alphabet_index[letter]]
+    new_letter = local_alphabet[alphabet_index[letter]]
     @encrypted_message << new_letter
     @indexes[position.to_sym] += 4
   end
-
-  # can I remove alphabet, indexes, etc. from attr_reader and instance variables and just call the methods?
 
   def encrypt(index, letter)
     if index == @indexes[:a]

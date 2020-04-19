@@ -20,20 +20,15 @@ class Shift
   end
 
   def encrypt_message
-    shift_a = @shifts[0]
-    shift_b = @shifts[1]
-    shift_c = @shifts[2]
-    shift_d = @shifts[3]
-
     index_a = 0
     index_b = 1
     index_c = 2
     index_d = 3
 
-    alphabet_a = alphabet.rotate(shift_a)
-    alphabet_b = alphabet.rotate(shift_b)
-    alphabet_c = alphabet.rotate(shift_c)
-    alphabet_d = alphabet.rotate(shift_d)
+    alphabet_a = alphabet.rotate(shifts_pairs[:a])
+    alphabet_b = alphabet.rotate(shifts_pairs[:b])
+    alphabet_c = alphabet.rotate(shifts_pairs[:c])
+    alphabet_d = alphabet.rotate(shifts_pairs[:d])
 
     encrypted_message = []
 

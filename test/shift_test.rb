@@ -67,7 +67,12 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_get_shifts
     shift = Shift.new("Hello World", "02715", "040895")
-    assert_equal [3, 27, 73, 20], shift.shifts
+    assert_equal [3, 27, 73, 20], shift.get_shifts
+  end
+
+  def test_it_can_make_hash_with_shifts
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal ({ :a => 3, :b => 27, :c => 73, :d => 20}), shift.shifts_pairs
   end
 
   def test_it_can_encrypt_text

@@ -116,9 +116,11 @@ class EncryptTest < Minitest::Test
     assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), encrypt.indexes
   end
 
-  def test_it_can_encrypt
+  def test_it_can_encrypt_letter
     encrypt = Encrypt.new("Hello World", "02715", "040895")
-
+    encrypt.encrypt_letter(0, "c")
+    assert_equal "f", encrypt.encrypted_message
+    assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), encrypt.indexes
   end
 
 end

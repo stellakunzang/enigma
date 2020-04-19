@@ -20,6 +20,10 @@ class EncryptTest < Minitest::Test
     assert_equal "hello world", encrypt.text
     assert_equal "02715", encrypt.key
     assert_equal "040895", encrypt.date
+  end
+
+  def test_it_has_alphabet
+    encrypt = Encrypt.new("Hello World", "02715", "040895")
     assert_equal ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "], encrypt.alphabet
   end
 
@@ -33,15 +37,10 @@ class EncryptTest < Minitest::Test
     assert_equal [02, 27, 71, 15], encrypt.keys
   end
 
-  def test_it_can_get_randomized_keys
+  def test_it_can_get_keys_from_randomized_
     encrypt = Encrypt.new("Hello World")
     assert_equal 4, encrypt.keys.length
     assert_instance_of Array, encrypt.keys
-  end
-
-  def test_it_can_get_offsets
-    encrypt = Encrypt.new("Hello World", "02715", "040895")
-    assert_equal [1, 0, 2, 5], encrypt.offsets
   end
 
   def test_date_squared
@@ -49,10 +48,17 @@ class EncryptTest < Minitest::Test
     assert_equal "1672401025", encrypt.date_squared
   end
 
-  def test_today_squared
+  def test_it_can_get_today_date
     encrypt = Encrypt.new("Hello World")
-    number = encrypt.today.to_i
-    assert_equal true, encrypt.date_squared == (number * number).to_s
+    assert_equal true, encrypt.today.length == 6
+    assert_equal true, encrypt.today.class == String
+  end
+
+  def test_today_squared
+    Date.stubs(:today).returns(Date.new(2020, 04, 18))
+    encrypt = Encrypt.new("Hello World")
+    assert_equal "180420", encrypt.date
+    assert_equal "32551376400", encrypt.date_squared
   end
 
   def test_it_can_get_last_four_digits
@@ -60,10 +66,15 @@ class EncryptTest < Minitest::Test
     assert_equal "1025", encrypt.last_four("040895")
   end
 
-  def test_it_can_get_today_date
+  def test_it_can_get_offsets
+    encrypt = Encrypt.new("Hello World", "02715", "040895")
+    assert_equal [1, 0, 2, 5], encrypt.offsets
+  end
+
+  def test_it_can_get_offsets_from_today
     encrypt = Encrypt.new("Hello World")
-    encrypt.stubs(:today).returns("180420")
-    assert_equal "180420", encrypt.today
+    Date.stubs(:today).returns(Date.new(2020, 04, 18))
+    assert_equal [6, 4, 0, 0], encrypt.offsets
   end
 
   def test_it_can_get_shifts

@@ -6,7 +6,7 @@ class Unshift
   include Defaultable
   include Abcdable
 
-  attr_reader :text, :key, :date, :date_squared, :last_four, :alphabet
+  attr_reader :text, :key, :date, :date_squared, :last_four
 
   def initialize(text, key, date = today)
     @text = text
@@ -14,7 +14,7 @@ class Unshift
     @date = date
     @date_squared ||= square_date(date).to_s
     @last_four = @date_squared[-4..-1]
-    @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+    @alphabet = alphabet
     @alphabet_index ||= alphabet_index
     @unshifts = get_shifts
   end

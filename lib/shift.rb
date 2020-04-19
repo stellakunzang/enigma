@@ -6,7 +6,7 @@ class Shift
   include Defaultable
   include Abcdable
 
-  attr_reader :text, :key, :date, :date_squared, :last_four, :alphabet, :shifts
+  attr_reader :text, :key, :date, :date_squared, :last_four, :shifts
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase
@@ -14,7 +14,7 @@ class Shift
     @date = date
     @date_squared ||= square_date(date).to_s
     @last_four = @date_squared[-4..-1]
-    @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+    @alphabet = alphabet
     @alphabet_index ||= alphabet_index
     @shifts = get_shifts
   end

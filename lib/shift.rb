@@ -1,5 +1,4 @@
 require_relative "defaultable"
-# require_relative "abcdable"
 
 class Shift
 
@@ -34,24 +33,14 @@ class Shift
     offsets.map {|number| number.to_i}
   end
 
-  def key_a
-    @key[0..1].to_i
-  end
-
-  def key_b
-    @key[1..2].to_i
-  end
-
-  def key_c
-    @key[2..3].to_i
-  end
-
-  def key_d
-    @key[3..4].to_i
-  end
-
   def keys
-    [key_a, key_b, key_c, key_d]
+    index_start = 0
+    keys_found = []
+    until keys_found.length == 4
+      keys_found << @key[index_start, 2]
+      index_start += 1
+    end
+    keys_found.map {|key| key.to_i }
   end
 
   def get_shifts

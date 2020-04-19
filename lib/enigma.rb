@@ -25,7 +25,8 @@ class Enigma
 
   def create_shift(text, key, date)
     shift = Shift.new(text, key, date)
-    @message = shift.encrypt_message
+    shift.encrypt_message
+    @message = shift.encrypted_message
     @key = shift.key
     @date = shift.date
   end
@@ -41,7 +42,8 @@ class Enigma
 
   def create_unshift(text, key, date)
     shift = Shift.new(text, key, date)
-    @message = shift.decrypt_message
+    shift.decrypt_message
+    @message = shift.encrypted_message
     @key = shift.key
     @date = shift.date
   end

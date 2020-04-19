@@ -33,21 +33,25 @@ class Decrypt < Shift
     @indexes[position.to_sym] += 4
   end
 
+  def decrypt_letter(index, letter)
+    if index == @indexes[:a]
+      reverse("a", letter)
+    elsif index == @indexes[:b]
+      reverse("b", letter)
+    elsif index == @indexes[:c]
+      reverse("c", letter)
+    elsif index == @indexes[:d]
+      reverse("d", letter)
+    end
+  end
+
   def decrypt_message
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
         @decrypted_message << letter
       else
-        if index == @indexes[:a]
-          reverse("a", letter)
-        elsif index == @indexes[:b]
-          reverse("b", letter)
-        elsif index == @indexes[:c]
-          reverse("c", letter)
-        elsif index == @indexes[:d]
-          reverse("d", letter)
-        end
+        decrypt_letter(index, letter)
       end
     end
   end

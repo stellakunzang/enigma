@@ -6,7 +6,7 @@ class Unshift
   include Defaultable
   include Abcdable
 
-  attr_reader :text, :key, :date, :date_squared, :last_four, :alphabet
+  attr_reader :text, :key, :date, :date_squared, :last_four, :unshifts
 
   def initialize(text, key, date = today)
     @text = text
@@ -14,26 +14,21 @@ class Unshift
     @date = date
     @date_squared ||= square_date(date).to_s
     @last_four = @date_squared[-4..-1]
-    @alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+    @alphabet = alphabet
     @alphabet_index ||= alphabet_index
     @unshifts = get_shifts
   end
 
   def decrypt_message
-    shift_a = - (@shifts[0])
-    shift_b = - (@shifts[1])
-    shift_c = - (@shifts[2])
-    shift_d = - (@shifts[3])
-
     index_a = 0
     index_b = 1
     index_c = 2
     index_d = 3
 
-    alphabet_a = alphabet.rotate(shift_a)
-    alphabet_b = alphabet.rotate(shift_b)
-    alphabet_c = alphabet.rotate(shift_c)
-    alphabet_d = alphabet.rotate(shift_d)
+    alphabet_a = alphabet.rotate(neg_shifts_pairs[:a])
+    alphabet_b = alphabet.rotate(neg_shifts_pairs[:b])
+    alphabet_c = alphabet.rotate(neg_shifts_pairs[:c])
+    alphabet_d = alphabet.rotate(neg_shifts_pairs[:d])
 
     decrypted_message = []
 

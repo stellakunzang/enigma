@@ -24,7 +24,7 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_randomize_key
     shift = Shift.new("Hello World")
-    assert_equal true, shift.key.length  == 5
+    assert_equal true, shift.key.length == 5
   end
 
   def test_it_can_get_keys
@@ -67,24 +67,55 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_get_shifts
     shift = Shift.new("Hello World", "02715", "040895")
-    assert_equal [3, 27, 73, 20], shift.shifts
+    assert_equal [3, 27, 73, 20], shift.get_shifts
+  end
+
+  def test_it_can_make_hash_with_shifts
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal ({ :a => 3, :b => 27, :c => 73, :d => 20}), shift.shifts_pairs
+  end
+
+  def test_it_can_make_negative_shift_hash
+    shift = Shift.new("keder ohulw", "02715", "040895")
+    assert_equal ({ :a => -3, :b => -27, :c => -73, :d => -20}), shift.neg_shifts_pairs
+  end
+
+  def test_it_can_generate_hash_with_starting_indexes_for_encrypt_method
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal ({ :a => 0, :b => 1, :c => 2, :d => 3}), shift.indexes
   end
 
   def test_it_can_encrypt_text
-    skip
     shift = Shift.new("Hello World", "02715", "040895")
-    assert_equal "keder ohulw", shift.encrypt_message
+    shift.encrypt_message
+    assert_equal "keder ohulw", shift.encrypted_message
+  end
+
+  def test_it_can_decrypt_text
+    shift = Shift.new("keder ohulw", "02715", "040895")
+    shift.decrypt_message
+    assert_equal "hello world", shift.encrypted_message
   end
 
   def test_it_can_encrypt_text_with_punctuation
-    skip
     shift = Shift.new("Hello World!", "02715", "040895")
-    assert_equal "keder ohulw!", shift.encrypt_message
+    shift.encrypt_message
+    assert_equal "keder ohulw!", shift.encrypted_message
   end
 
   def test_it_can_create_hash_of_alphabet_with_index
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal ({"a"=>0,"b"=>1,"c"=>2,"d"=>3,"e"=>4,"f"=>5,"g"=>6,"h"=>7,"i"=>8,"j"=>9,"k"=>10,"l"=>11,"m"=>12,"n"=>13,"o"=>14,"p"=>15,"q"=>16,"r"=>17,"s"=>18,"t"=>19,"u"=>20,"v"=>21,"w"=>22,"x"=>23,"y"=>24,"z"=>25," "=>26}), shift.alphabet_index
   end
+
+  # def test_it_can_turn
+  # end
+
+  # def test_it_can_reverse 
+  # end
+
+
+
+
 
 end

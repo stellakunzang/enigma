@@ -1,5 +1,17 @@
 module Abcdable
 
+  def alphabet
+    ("a".."z").to_a << " "
+  end
+
+  def alphabet_index
+    alphabet_with_index = {}
+    alphabet.to_enum.with_index do |letter, index|
+      alphabet_with_index[letter] = index
+    end
+    alphabet_with_index
+  end
+
   def offsets
     offsets = @last_four.split("")
     offsets.map {|number| number.to_i}
@@ -30,6 +42,25 @@ module Abcdable
     @shifts = key_offset_pairs.map do |pair|
       pair.sum
     end
+  end
+
+  def shifts_pairs
+    letters = [:a, :b, :c, :d]
+    Hash[letters.zip(@shifts)]
+  end
+
+  def neg_shifts_pairs
+    negative_pairs = {}
+    shifts_pairs.map do |letter, digit|
+      negative_pairs[letter] = - digit
+    end
+    negative_pairs
+  end
+
+  def set_indexes
+    letters = [:a, :b, :c, :d]
+    starting_indexes = [0, 1, 2, 3]
+    Hash[letters.zip(starting_indexes)]
   end
 
 end

@@ -5,8 +5,7 @@ require "minitest/pride"
 require "pry"
 require "./lib/enigma"
 require "./lib/shift"
-require "Date"
-require "./lib/defaultable"
+require "./lib/unshift"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test
@@ -53,7 +52,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_decrypt
-  skip
   enigma = Enigma.new
   assert_equal ({
     decryption: "hello world",

@@ -5,7 +5,6 @@ require "minitest/pride"
 require "pry"
 require "./lib/enigma"
 require "./lib/shift"
-require "./lib/unshift"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test

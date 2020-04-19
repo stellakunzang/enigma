@@ -28,13 +28,6 @@ class Shift
     @indexes[position.to_sym] += 4
   end
 
-  def reverse(position, letter)
-    local_alphabet = @alphabet.rotate(neg_shifts_pairs[position.to_sym])
-    new_letter = local_alphabet[@alphabet_index[letter]]
-    @encrypted_message << new_letter
-    @indexes[position.to_sym] += 4
-  end
-
   def encrypt_message
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
@@ -54,44 +47,30 @@ class Shift
     end
   end
 
+  def reverse(position, letter)
+    local_alphabet = @alphabet.rotate(neg_shifts_pairs[position.to_sym])
+    new_letter = local_alphabet[@alphabet_index[letter]]
+    @encrypted_message << new_letter
+    @indexes[position.to_sym] += 4
+  end
+
   def decrypt_message
-    index_a = 0
-    index_b = 1
-    index_c = 2
-    index_d = 3
-
-    alphabet_a = alphabet.rotate(neg_shifts_pairs[:a])
-    alphabet_b = alphabet.rotate(neg_shifts_pairs[:b])
-    alphabet_c = alphabet.rotate(neg_shifts_pairs[:c])
-    alphabet_d = alphabet.rotate(neg_shifts_pairs[:d])
-
-    decrypted_message = []
-
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
-        decrypted_message << letter
+        @encrypted_message << letter
       else
-        if index == index_a
-          new_letter = alphabet_a[@alphabet_index[letter]]
-          decrypted_message << new_letter
-          index_a += 4
-        elsif index == index_b
-          new_letter = alphabet_b[@alphabet_index[letter]]
-          decrypted_message << new_letter
-          index_b += 4
-        elsif index == index_c
-          new_letter = alphabet_c[@alphabet_index[letter]]
-          decrypted_message << new_letter
-          index_c += 4
-        elsif index == index_d
-          new_letter = alphabet_d[@alphabet_index[letter]]
-          decrypted_message << new_letter
-          index_d += 4
+        if index == @indexes[:a]
+          reverse("a", letter)
+        elsif index == @indexes[:b]
+          reverse("b", letter)
+        elsif index == @indexes[:c]
+          reverse("c", letter)
+        elsif index == @indexes[:d]
+          reverse("d", letter)
         end
       end
     end
-    decrypted_message.join
   end
 
 

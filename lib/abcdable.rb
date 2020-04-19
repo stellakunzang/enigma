@@ -1,5 +1,17 @@
 module Abcdable
 
+  def alphabet
+    ("a".."z").to_a << " "
+  end
+
+  def alphabet_index
+    alphabet_with_index = {}
+    alphabet.to_enum.with_index do |letter, index|
+      alphabet_with_index[letter] = index
+    end
+    alphabet_with_index
+  end
+
   def offsets
     offsets = @last_four.split("")
     offsets.map {|number| number.to_i}

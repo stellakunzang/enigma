@@ -94,7 +94,7 @@ class ShiftTest < Minitest::Test
   def test_it_can_decrypt_text
     shift = Shift.new("keder ohulw", "02715", "040895")
     shift.decrypt_message
-    assert_equal "hello world", shift.encrypted_message
+    assert_equal "hello world", shift.decrypted_message
   end
 
   def test_it_can_encrypt_text_with_punctuation
@@ -111,7 +111,7 @@ class ShiftTest < Minitest::Test
   # def test_it_can_turn
   # end
 
-  # def test_it_can_reverse 
+  # def test_it_can_reverse
   # end
 
 

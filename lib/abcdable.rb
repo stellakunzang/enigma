@@ -44,4 +44,17 @@ module Abcdable
     end
   end
 
+  def shifts_pairs
+    letters = [:a, :b, :c, :d]
+    Hash[letters.zip(@shifts)]
+  end
+
+  def neg_shifts_pairs
+    negative_pairs = {}
+    shifts_pairs.map do |letter, digit|
+      negative_pairs[letter] = - digit
+    end
+    negative_pairs
+  end
+
 end

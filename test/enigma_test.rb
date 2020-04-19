@@ -5,8 +5,7 @@ require "minitest/pride"
 require "pry"
 require "./lib/enigma"
 require "./lib/shift"
-require "Date"
-require "./lib/defaultable"
+require "./lib/unshift"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test
@@ -32,6 +31,16 @@ class EnigmaTest < Minitest::Test
     assert_equal 3, enigma.encrypt("Hello World").length
   end
 
+  def test_it_can_encrypt_with_punctuation
+    enigma = Enigma.new
+    assert_equal ({
+      encryption: " dy,hqrt?",
+      key: "80302",
+      date: "040387"
+      }),
+    enigma.encrypt("sup, girl?", "80302", "040387")
+  end
+
   def test_it_can_encrypt_punctuation
     enigma = Enigma.new
     assert_equal ({
@@ -43,7 +52,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_decrypt
-  skip
   enigma = Enigma.new
   assert_equal ({
     decryption: "hello world",

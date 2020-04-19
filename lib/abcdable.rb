@@ -57,4 +57,10 @@ module Abcdable
     negative_pairs
   end
 
+  def indexes
+    letters = [:a, :b, :c, :d]
+    starting_indexes = [0, 1, 2, 3]
+    Hash[letters.zip(starting_indexes)]
+  end
+
 end

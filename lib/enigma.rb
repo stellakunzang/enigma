@@ -1,6 +1,5 @@
 require_relative "defaultable"
 require_relative "shift"
-require_relative "unshift"
 require "Date"
 
 class Enigma
@@ -9,15 +8,10 @@ class Enigma
 
   attr_reader :message, :key, :date
 
-  # :encrypt_message, :encrypt_key, :encrypt_date, :decrypt_message, :decrypt_key, :decrypt_date
-
   def initialize
     @message = nil
     @key = nil
     @date = nil
-    # @decrypt_message = nil
-    # @decrypt_key = nil
-    # @decrypt_date = nil
   end
 
   def encrypt(text, key = randomize, date = today)
@@ -46,10 +40,10 @@ class Enigma
   end
 
   def create_unshift(text, key, date)
-    unshift = Unshift.new(text, key, date)
-    @message = unshift.decrypt_message
-    @key = unshift.key
-    @date = unshift.date
+    shift = Shift.new(text, key, date)
+    @message = shift.decrypt_message
+    @key = shift.key
+    @date = shift.date
   end
 
 end

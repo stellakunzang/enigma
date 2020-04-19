@@ -87,22 +87,30 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_encrypt_text
     shift = Shift.new("Hello World", "02715", "040895")
-    assert_equal "keder ohulw", shift.encrypt_message
+    shift.encrypt_message
+    assert_equal "keder ohulw", shift.encrypted_message
   end
 
   def test_it_can_decrypt_text
     shift = Shift.new("keder ohulw", "02715", "040895")
+
     assert_equal "hello world", shift.decrypt_message
   end
 
   def test_it_can_encrypt_text_with_punctuation
     shift = Shift.new("Hello World!", "02715", "040895")
-    assert_equal "keder ohulw!", shift.encrypt_message
+    shift.encrypt_message
+    assert_equal "keder ohulw!", shift.encrypted_message
   end
 
   def test_it_can_create_hash_of_alphabet_with_index
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal ({"a"=>0,"b"=>1,"c"=>2,"d"=>3,"e"=>4,"f"=>5,"g"=>6,"h"=>7,"i"=>8,"j"=>9,"k"=>10,"l"=>11,"m"=>12,"n"=>13,"o"=>14,"p"=>15,"q"=>16,"r"=>17,"s"=>18,"t"=>19,"u"=>20,"v"=>21,"w"=>22,"x"=>23,"y"=>24,"z"=>25," "=>26}), shift.alphabet_index
   end
+
+  # def test_it_can_rotate
+  # end
+
+
 
 end

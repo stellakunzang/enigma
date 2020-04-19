@@ -75,6 +75,11 @@ class ShiftTest < Minitest::Test
     assert_equal ({ :a => 3, :b => 27, :c => 73, :d => 20}), shift.shifts_pairs
   end
 
+  def test_it_can_generate_hash_with_starting_indexes_for_encrypt_method
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal ({ :a => 0, :b => 1, :c => 2, :d => 3}), shift.indexes 
+  end
+
   def test_it_can_encrypt_text
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal "keder ohulw", shift.encrypt_message

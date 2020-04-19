@@ -14,10 +14,10 @@ else
 end
 
 text.close
-encrypted_text = enigma.encrypt_message
+encrypted_text = enigma.message
 
 encrypted = File.open(ARGV[1], "w")
 encrypted.write(encrypted_text)
 encrypted.close
 
-puts "Created #{ARGV[1]} with the key #{enigma.encrypt_key} and the date #{enigma.encrypt_date}"
+puts "Created #{ARGV[1]} with the key #{enigma.key} and the date #{enigma.date}"

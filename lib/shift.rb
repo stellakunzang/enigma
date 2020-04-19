@@ -34,24 +34,24 @@ class Shift
     offsets.map {|number| number.to_i}
   end
 
-  def a
+  def key_a
     @key[0..1].to_i
   end
 
-  def b
+  def key_b
     @key[1..2].to_i
   end
 
-  def c
+  def key_c
     @key[2..3].to_i
   end
 
-  def d
+  def key_d
     @key[3..4].to_i
   end
 
   def keys
-    [a, b, c, d]
+    [key_a, key_b, key_c, key_d]
   end
 
   def get_shifts

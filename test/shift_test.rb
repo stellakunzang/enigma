@@ -71,13 +71,11 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_encrypt_text
-    skip
     shift = Shift.new("Hello World", "02715", "040895")
     assert_equal "keder ohulw", shift.encrypt_message
   end
 
   def test_it_can_encrypt_text_with_punctuation
-    skip
     shift = Shift.new("Hello World!", "02715", "040895")
     assert_equal "keder ohulw!", shift.encrypt_message
   end

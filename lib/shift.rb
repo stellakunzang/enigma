@@ -6,7 +6,7 @@ class Shift
   include Defaultable
   include Abcdable
 
-  attr_reader :text, :key, :date, :date_squared, :last_four, :shifts, :indexes
+  attr_reader :text, :key, :date, :date_squared, :last_four, :shifts, :indexes, :encrypted_message
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase
@@ -18,41 +18,40 @@ class Shift
     @alphabet_index ||= alphabet_index
     @shifts = get_shifts
     @indexes = set_indexes
+    @encrypted_message = [].join
+  end
+
+  def turn(position, letter)
+    local_alphabet = @alphabet.rotate(shifts_pairs[position.to_sym])
+    new_letter = local_alphabet[@alphabet_index[letter]]
+    @encrypted_message << new_letter
+    @indexes[position.to_sym] += 4
+  end
+
+  def reverse(position, letter)
+    local_alphabet = @alphabet.rotate(neg_shifts_pairs[position.to_sym])
+    new_letter = local_alphabet[@alphabet_index[letter]]
+    @encrypted_message << new_letter
+    @indexes[position.to_sym] += 4
   end
 
   def encrypt_message
-    alphabet_a = alphabet.rotate(shifts_pairs[:a])
-    alphabet_b = alphabet.rotate(shifts_pairs[:b])
-    alphabet_c = alphabet.rotate(shifts_pairs[:c])
-    alphabet_d = alphabet.rotate(shifts_pairs[:d])
-
-    encrypted_message = []
-
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
-        encrypted_message << letter
+        @encrypted_message << letter
       else
         if index == @indexes[:a]
-          new_letter = alphabet_a[@alphabet_index[letter]]
-          encrypted_message << new_letter
-          @indexes[:a] += 4
+          turn("a", letter)
         elsif index == @indexes[:b]
-          new_letter = alphabet_b[@alphabet_index[letter]]
-          encrypted_message << new_letter
-          @indexes[:b] += 4
+          turn("b", letter)
         elsif index == @indexes[:c]
-          new_letter = alphabet_c[@alphabet_index[letter]]
-          encrypted_message << new_letter
-          @indexes[:c] += 4
+          turn("c", letter)
         elsif index == @indexes[:d]
-          new_letter = alphabet_d[@alphabet_index[letter]]
-          encrypted_message << new_letter
-          @indexes[:d] += 4
+          turn("d", letter)
         end
       end
     end
-    encrypted_message.join
   end
 
   def decrypt_message

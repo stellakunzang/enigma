@@ -29,6 +29,11 @@ class Shift
     @decrypted_message = [].join
   end
 
+  def square_date(date)
+    date = date.to_i
+    date * date
+  end
+
   def turn(position, letter)
     local_alphabet = @alphabet.rotate(shifts_pairs[position.to_sym])
     new_letter = local_alphabet[@alphabet_index[letter]]

@@ -4,8 +4,8 @@ require "minitest/autorun"
 require "minitest/pride"
 require "pry"
 require "./lib/enigma"
-require "./lib/encrypt"
-require "./lib/decrypt"
+require "./lib/encryption"
+require "./lib/decryption"
 require "mocha/minitest"
 
 class EnigmaTest < Minitest::Test

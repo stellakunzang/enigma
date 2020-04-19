@@ -6,7 +6,9 @@ class Enigma
 
   include Defaultable
 
-  attr_reader :message, :key, :date
+  attr_reader :message,
+              :key,
+              :date
 
   def initialize
     @message = nil
@@ -43,7 +45,7 @@ class Enigma
   def create_unshift(text, key, date)
     shift = Shift.new(text, key, date)
     shift.decrypt_message
-    @message = shift.encrypted_message
+    @message = shift.decrypted_message
     @key = shift.key
     @date = shift.date
   end

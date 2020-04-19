@@ -1,3 +1,4 @@
+require "Date"
 module Defaultable
 
   def randomize

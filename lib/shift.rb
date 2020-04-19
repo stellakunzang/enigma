@@ -24,6 +24,7 @@ class Shift
     shift_b = @shifts[1]
     shift_c = @shifts[2]
     shift_d = @shifts[3]
+
     index_a = 0
     index_b = 1
     index_c = 2

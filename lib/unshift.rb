@@ -40,7 +40,7 @@ class Unshift
     raw_text = @text.split("").to_enum
     raw_text.with_index do |letter, index|
       if !alphabet.include?(letter)
-        encrypted_message << letter
+        decrypted_message << letter
       else
         if index == index_a
           new_letter = alphabet_a[@alphabet_index[letter]]

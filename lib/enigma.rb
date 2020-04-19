@@ -7,7 +7,7 @@ class Enigma
 
   include Defaultable
 
-  attr_reader :encrypt_message, :encrypt_key, :encrypt_date
+  attr_reader :encrypt_message, :encrypt_key, :encrypt_date, :decrypt_message, :decrypt_key, :decrypt_date
 
   def initialize
     @encrypt_message = nil

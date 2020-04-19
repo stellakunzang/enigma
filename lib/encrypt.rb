@@ -26,7 +26,7 @@ class Encrypt < Shift
     @indexes[position.to_sym] += 4
   end
 
-  def encrypt(index, letter)
+  def encrypt_letter(index, letter)
     if index == @indexes[:a]
       turn("a", letter)
     elsif index == @indexes[:b]
@@ -44,7 +44,7 @@ class Encrypt < Shift
       if !alphabet.include?(letter)
         @encrypted_message << letter
       else
-        encrypt(index, letter)
+        encrypt_letter(index, letter)
       end
     end
   end

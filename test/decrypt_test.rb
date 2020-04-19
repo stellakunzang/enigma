@@ -115,4 +115,11 @@ class DecryptTest < Minitest::Test
     assert_equal "c", decrypt.decrypted_message
     assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), decrypt.indexes
   end
+
+  def test_it_can_decrypt_letter
+    decrypt = Decrypt.new("Hello World", "02715", "040895")
+    decrypt.decrypt_letter(0, "f")
+    assert_equal "c", decrypt.decrypted_message
+    assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), decrypt.indexes
+  end
 end

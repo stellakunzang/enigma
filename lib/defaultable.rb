@@ -14,16 +14,5 @@ module Defaultable
     date * date
   end
 
-  def alphabet
-    ("a".."z").to_a << " "
-  end
-
-  def alphabet_index
-    alphabet_with_index = {}
-    alphabet.to_enum.with_index do |letter, index|
-      alphabet_with_index[letter] = index
-    end
-    alphabet_with_index
-  end
 
 end

@@ -14,5 +14,4 @@ module Defaultable
     date * date
   end
 
-
 end

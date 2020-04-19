@@ -28,7 +28,7 @@ class EncryptTest < Minitest::Test
   end
 
   def test_it_can_randomize_key
-    encrypt = Encrypt.new("Hello World", "02715", "040895")
+    encrypt = Encrypt.new("Hello World")
     assert_equal true, encrypt.key.length == 5
   end
 

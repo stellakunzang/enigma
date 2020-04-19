@@ -14,7 +14,6 @@ class Decrypt < Shift
     @key = super
     @date = super
     @shifts = super
-    @alphabet_index ||= alphabet_index
     @indexes = set_indexes
     @decrypted_message = [].join
   end
@@ -29,7 +28,7 @@ class Decrypt < Shift
 
   def reverse(position, letter)
     local_alphabet = alphabet.rotate(neg_shifts_pairs[position.to_sym])
-    new_letter = local_alphabet[@alphabet_index[letter]]
+    new_letter = local_alphabet[alphabet_index[letter]]
     @decrypted_message << new_letter
     @indexes[position.to_sym] += 4
   end

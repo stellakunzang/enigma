@@ -17,7 +17,7 @@ class Enigma
   end
 
   def encrypt(text, key = randomize, date = today)
-    create_shift(text, key, date)
+    create_encryption(text, key, date)
     data = Hash.new
     data[:encryption] = @message
     data[:key] = @key
@@ -25,16 +25,16 @@ class Enigma
     data
   end
 
-  def create_shift(text, key, date)
-    shift = Shift.new(text, key, date)
-    shift.encrypt_message
-    @message = shift.encrypted_message
-    @key = shift.key
-    @date = shift.date
+  def create_encryption(text, key, date)
+    encryption = Encrypt.new(text, key, date)
+    encryption.encrypt_message
+    @message = encryption.encrypted_message
+    @key = encryption.key
+    @date = encryption.date
   end
 
   def decrypt(text, key, date = today)
-    create_unshift(text, key, date)
+    create_decryption(text, key, date)
     data = Hash.new
     data[:decryption] = @message
     data[:key] = @key
@@ -42,12 +42,12 @@ class Enigma
     return data
   end
 
-  def create_unshift(text, key, date)
-    shift = Shift.new(text, key, date)
-    shift.decrypt_message
-    @message = shift.decrypted_message
-    @key = shift.key
-    @date = shift.date
+  def create_decryption(text, key, date)
+    decryption = Decrypt.new(text, key, date)
+    decryption.decrypt_message
+    @message = decryption.decrypted_message
+    @key = decryption.key
+    @date = decryption.date
   end
 
 end

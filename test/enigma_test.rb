@@ -29,16 +29,21 @@ class EnigmaTest < Minitest::Test
     enigma = Enigma.new
     assert_instance_of Hash, enigma.encrypt("Hello World")
     assert_equal 3, enigma.encrypt("Hello World").length
+    assert_equal String, enigma.message.class
+    assert_equal 11, enigma.message.length
+    assert_equal String, enigma.key.class
+    assert_equal 5, enigma.key.length
+    assert_equal String, enigma.date.class
+    assert_equal 6, enigma.date.length
   end
 
-  def test_it_can_encrypt_with_punctuation
+  def test_it_can_encrypt_with_punctuation_between_letters
     enigma = Enigma.new
     assert_equal ({
       encryption: " dy,hqrt?",
       key: "80302",
       date: "040387"
-      }),
-    enigma.encrypt("sup, girl?", "80302", "040387")
+      }), enigma.encrypt("sup, girl?", "80302", "040387")
   end
 
   def test_it_can_encrypt_punctuation
@@ -47,17 +52,16 @@ class EnigmaTest < Minitest::Test
       encryption: "keder ohulw!",
       key: "02715",
       date: "040895"
-      }),
-      enigma.encrypt("Hello World!", "02715", "040895")
+      }), enigma.encrypt("Hello World!", "02715", "040895")
   end
 
   def test_it_can_decrypt
-  enigma = Enigma.new
-  assert_equal ({
-    decryption: "hello world",
-    key: "02715",
-    date: "040895"
-    }), enigma.decrypt("keder ohulw", "02715", "040895")
+    enigma = Enigma.new
+    assert_equal ({
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+      }), enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
 end

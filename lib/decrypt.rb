@@ -1,5 +1,4 @@
 require "./lib/enigma"
-require "pry"
 
 enigma = Enigma.new
 
@@ -9,7 +8,7 @@ if !ARGV[3]
   enigma.decrypt(text.read, ARGV[2])
 else
   enigma.decrypt(text.read, ARGV[2], ARGV[3])
-end 
+end
 
 text.close
 decrypted_text = enigma.message

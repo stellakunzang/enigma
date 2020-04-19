@@ -35,7 +35,7 @@ class UnshiftTest < Minitest::Test
 
   def test_it_can_make_negative_shift_hash
     unshift = Unshift.new("keder ohulw", "02715", "040895")
-    assert_equal ({ :a => -3, :b => -27, :c => -73, :d => -20}), unshift.negative_shifts_pairs
-  end 
+    assert_equal ({ :a => -3, :b => -27, :c => -73, :d => -20}), unshift.neg_shifts_pairs
+  end
 
 end

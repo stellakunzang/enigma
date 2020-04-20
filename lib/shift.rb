@@ -3,13 +3,15 @@ require_relative "abcdable"
 class Shift
 
   include Defaultable
-  include Abcdable 
+  include Abcdable
 
   attr_reader :text,
               :key,
               :date,
               :date_squared,
-              :last_four
+              :last_four,
+              :shifts,
+              :indexes
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase

@@ -51,10 +51,14 @@ class ShiftTest < Minitest::Test
     assert_equal [3, 27, 73, 20], shift.shifts
   end
 
+  def test_it_can_set_indexes
+    shift = Shift.new("Hello World", "02715", "040895")
+    assert_equal ({ :a => 0, :b => 1, :c => 2, :d => 3}), shift.indexes 
+  end
+
   def test_it_can_advance_symbol_index
     shift = Shift.new("Hello World", "02715", "040895")
     shift.advance_symbol_index(0)
     assert_equal 4, shift.indexes[:a]
   end
-
 end

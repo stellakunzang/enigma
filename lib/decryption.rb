@@ -15,7 +15,6 @@ class Decryption < Shift
     @key = super
     @date = super
     @shifts = super
-    @indexes = set_indexes
     @decrypted_message = [].join
   end
 
@@ -50,6 +49,7 @@ class Decryption < Shift
     raw_text = @text.split("")
     raw_text.each.with_index do |letter, index|
       if !alphabet.include?(letter)
+        advance_symbol_index(index)
         @decrypted_message << letter
       else
         decrypt_letter(index, letter)

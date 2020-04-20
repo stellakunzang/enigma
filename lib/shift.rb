@@ -1,5 +1,6 @@
 require_relative "defaultable"
 require_relative "abcdable"
+
 class Shift
 
   include Defaultable

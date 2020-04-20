@@ -1,5 +1,6 @@
 require_relative "abcdable"
 require_relative "shift"
+require 'pry'
 
 class Decryption < Shift
 
@@ -46,8 +47,8 @@ class Decryption < Shift
   end
 
   def decrypt_message
-    raw_text = @text.split("").to_enum
-    raw_text.with_index do |letter, index|
+    raw_text = @text.split("")
+    raw_text.each.with_index do |letter, index|
       if !alphabet.include?(letter)
         @decrypted_message << letter
       else

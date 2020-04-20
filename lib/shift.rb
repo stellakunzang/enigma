@@ -1,14 +1,18 @@
 require_relative "defaultable"
+require_relative "abcdable"
 
 class Shift
 
   include Defaultable
+  include Abcdable
 
   attr_reader :text,
               :key,
               :date,
               :date_squared,
-              :last_four
+              :last_four,
+              :shifts,
+              :indexes
 
   def initialize(text, key = randomize, date = today)
     @text = text.downcase
@@ -17,6 +21,7 @@ class Shift
     @date_squared = square_date(date).to_s
     @last_four = last_four(date)
     @shifts = get_shifts
+    @indexes = set_indexes
   end
 
   def square_date(date)
@@ -47,6 +52,18 @@ class Shift
     key_offset_pairs = keys.zip(offsets)
     @shifts = key_offset_pairs.map do |pair|
       pair.sum
+    end
+  end
+
+  def advance_symbol_index(index)
+    if index == @indexes[:a]
+      @indexes[:a] += 4
+    elsif index == @indexes[:b]
+      @indexes[:b] += 4
+    elsif index == @indexes[:c]
+      @indexes[:c] += 4
+    elsif index == @indexes[:d]
+      @indexes[:d] += 4
     end
   end
 

@@ -1,21 +1,14 @@
-require_relative "abcdable"
-require_relative "defaultable"
 require_relative "shift"
 
 class Encryption < Shift
 
-  include Abcdable
-  include Defaultable
-
-  attr_reader :indexes,
-              :encrypted_message
+  attr_reader :encrypted_message
 
   def initialize(text, key = randomize, date = today)
     @text = super
     @key = super
     @date = super
     @shifts = super
-    @indexes = set_indexes
     @encrypted_message = [].join
   end
 
@@ -39,9 +32,10 @@ class Encryption < Shift
   end
 
   def encrypt_message
-    raw_text = @text.split("").to_enum
-    raw_text.with_index do |letter, index|
+    raw_text = @text.split("")
+    raw_text.each.with_index do |letter, index|
       if !alphabet.include?(letter)
+        advance_symbol_index(index)
         @encrypted_message << letter
       else
         encrypt_letter(index, letter)

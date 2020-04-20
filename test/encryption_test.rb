@@ -104,6 +104,12 @@ class EncryptionTest < Minitest::Test
     assert_equal "keder ohulw!", encrypt.encrypted_message
   end
 
+  def test_it_can_encrypt_text_with_punctuation_in_the_middle
+    encrypt = Encryption.new("Hello, World!", "02715", "040895")
+    encrypt.encrypt_message
+    assert_equal "keder,sprrdx!", encrypt.encrypted_message
+  end
+
   def test_it_can_create_hash_of_alphabet_with_index
     encrypt = Encryption.new("Hello World", "02715", "040895")
     assert_equal ({"a"=>0,"b"=>1,"c"=>2,"d"=>3,"e"=>4,"f"=>5,"g"=>6,"h"=>7,"i"=>8,"j"=>9,"k"=>10,"l"=>11,"m"=>12,"n"=>13,"o"=>14,"p"=>15,"q"=>16,"r"=>17,"s"=>18,"t"=>19,"u"=>20,"v"=>21,"w"=>22,"x"=>23,"y"=>24,"z"=>25," "=>26}), encrypt.alphabet_index
@@ -121,6 +127,16 @@ class EncryptionTest < Minitest::Test
     encrypt.encrypt_letter(0, "c")
     assert_equal "f", encrypt.encrypted_message
     assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), encrypt.indexes
+  end
+
+  def test_it_can_advance_symbol_index_with_punctuation
+    encrypt = Encryption.new(".....", "02715", "040895")
+    encrypt.encrypt_message
+    assert_equal 8, encrypt.indexes[:a]
+    assert_equal 5, encrypt.indexes[:b]
+    assert_equal 6, encrypt.indexes[:c]
+    assert_equal 7, encrypt.indexes[:d]
+    assert_equal ".....", encrypt.encrypted_message
   end
 
 end

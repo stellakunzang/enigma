@@ -87,7 +87,7 @@ class DecryptionTest < Minitest::Test
     assert_equal ({ :a => -3, :b => -27, :c => -73, :d => -20}), decrypt.neg_shifts_pairs
   end
 
-  def test_it_can_generate_hash_with_starting_indexes_for_decrypt_method
+  def test_it_can_set_indexes_for_decrypt_message
     decrypt = Decryption.new("Hello World", "02715", "040895")
     assert_equal ({ :a => 0, :b => 1, :c => 2, :d => 3}), decrypt.indexes
   end
@@ -125,7 +125,7 @@ class DecryptionTest < Minitest::Test
 
   def test_it_can_decrypt_with_punctuation_between_letters
     decrypt = Decryption.new("keder,sprrdx!", "02715", "040895")
-    decrypt.decrypt_message 
+    decrypt.decrypt_message
     assert_equal "hello, world!", decrypt.decrypted_message
   end
 

@@ -10,12 +10,6 @@ class Enigma
               :key,
               :date
 
-  def initialize
-    @message = nil
-    @key = nil
-    @date = nil
-  end
-
   def encrypt(text, key = randomize, date = today)
     create_encryption(text, key, date)
     data = Hash.new

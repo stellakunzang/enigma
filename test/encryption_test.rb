@@ -37,7 +37,7 @@ class EncryptionTest < Minitest::Test
     assert_equal [02, 27, 71, 15], encrypt.keys
   end
 
-  def test_it_can_get_keys_from_randomized_
+  def test_it_can_get_keys_from_randomized
     encrypt = Encryption.new("Hello World")
     assert_equal 4, encrypt.keys.length
     assert_instance_of Array, encrypt.keys

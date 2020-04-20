@@ -40,7 +40,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_encrypt_with_punctuation_between_letters
     enigma = Enigma.new
     assert_equal ({
-      encryption: " dy,hqrt?",
+      encryption: " dy,hqrbt?",
       key: "80302",
       date: "040387"
       }), enigma.encrypt("sup, girl?", "80302", "040387")

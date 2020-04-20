@@ -129,10 +129,14 @@ class EncryptionTest < Minitest::Test
     assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), encrypt.indexes
   end
 
-  def test_it_can_advance_symbol_index
-    encrypt = Encryption.new("Hello, World", "02715", "040895")
-    encrypt.advance_symbol_index(6)
-    assert_equal 10, encrypt.indexes[:b]
+  def test_it_can_advance_symbol_index_with_punctuation
+    encrypt = Encryption.new(".....", "02715", "040895")
+    encrypt.encrypt_message
+    assert_equal 8, encrypt.indexes[:a]
+    assert_equal 5, encrypt.indexes[:b]
+    assert_equal 6, encrypt.indexes[:c]
+    assert_equal 7, encrypt.indexes[:d]
+    assert_equal ".....", encrypt.encrypted_message
   end
 
 end

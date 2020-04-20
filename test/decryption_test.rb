@@ -122,4 +122,9 @@ class DecryptionTest < Minitest::Test
     assert_equal "c", decrypt.decrypted_message
     assert_equal ({:a => 4, :b => 1, :c => 2, :d => 3}), decrypt.indexes
   end
+
+  def test_it_can_decrypt_with_punctuation_between_letters
+    decrypt = Decryption.new(" dy,hqrt?", "80304", "040387")
+    assert_equal "sup, girl?", decrypt.decrypted_message
+  end
 end

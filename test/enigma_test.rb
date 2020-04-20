@@ -55,6 +55,14 @@ class EnigmaTest < Minitest::Test
       }), enigma.encrypt("sup, girl?", "80302", "040387")
   end
 
+  def test_it_can_create_encryption
+    enigma = Enigma.new
+    enigma.create_encryption("hello world", "02715", "040895")
+    assert_equal "keder ohulw", enigma.message
+    assert_equal "02715", enigma.key
+    assert_equal "040895", enigma.date
+  end
+
   def test_it_can_decrypt
     enigma = Enigma.new
     assert_equal ({

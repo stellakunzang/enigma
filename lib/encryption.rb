@@ -15,7 +15,6 @@ class Encryption < Shift
     @key = super
     @date = super
     @shifts = super
-    @indexes = set_indexes
     @encrypted_message = [].join
   end
 
@@ -38,24 +37,12 @@ class Encryption < Shift
     end
   end
 
-  def advance_symbol_index(index)
-    if index == @indexes[:a]
-      @indexes[:a] += 4
-    elsif index == @indexes[:b]
-      @indexes[:b] += 4
-    elsif index == @indexes[:c]
-      @indexes[:c] += 4
-    elsif index == @indexes[:d]
-      @indexes[:d] += 4
-    end
-  end
-
   def encrypt_message
     raw_text = @text.split("")
     raw_text.each.with_index do |letter, index|
       if !alphabet.include?(letter)
-        @encrypted_message << letter
         advance_symbol_index(index)
+        @encrypted_message << letter
       else
         encrypt_letter(index, letter)
       end

@@ -1,7 +1,6 @@
 require_relative "defaultable"
 require_relative "decryption"
 require_relative "encryption"
-require "Date"
 
 class Enigma
 

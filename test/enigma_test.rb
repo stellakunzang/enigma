@@ -37,15 +37,6 @@ class EnigmaTest < Minitest::Test
     assert_equal 6, enigma.date.length
   end
 
-  def test_it_can_encrypt_with_punctuation_between_letters
-    enigma = Enigma.new
-    assert_equal ({
-      encryption: " dy,hqrbt?",
-      key: "80302",
-      date: "040387"
-      }), enigma.encrypt("sup, girl?", "80302", "040387")
-  end
-
   def test_it_can_encrypt_punctuation
     enigma = Enigma.new
     assert_equal ({
@@ -53,6 +44,15 @@ class EnigmaTest < Minitest::Test
       key: "02715",
       date: "040895"
       }), enigma.encrypt("Hello World!", "02715", "040895")
+  end
+
+  def test_it_can_encrypt_with_punctuation_between_letters
+    enigma = Enigma.new
+    assert_equal ({
+      encryption: " dy,hqrbt?",
+      key: "80302",
+      date: "040387"
+      }), enigma.encrypt("sup, girl?", "80302", "040387")
   end
 
   def test_it_can_decrypt
@@ -71,6 +71,15 @@ class EnigmaTest < Minitest::Test
       key: "02715",
       date: "040895"
       }), enigma.decrypt("keder ohulw!", "02715", "040895")
+  end
+
+  def test_it_can_decrypt_with_punctuation_between_letters
+    enigma = Enigma.new
+    assert_equal ({
+      decryption: "sup, girl?",
+      key: "80302",
+      date: "040387"
+      }), enigma.decrypt(" dy,hqrbt?", "80302", "040387")
   end
 
 end

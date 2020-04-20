@@ -1,14 +1,8 @@
-require_relative "abcdable"
-require_relative "defaultable"
 require_relative "shift"
 
 class Encryption < Shift
 
-  include Abcdable
-  include Defaultable
-
-  attr_reader :indexes,
-              :encrypted_message
+  attr_reader :encrypted_message
 
   def initialize(text, key = randomize, date = today)
     @text = super

@@ -6,7 +6,7 @@ module Abcdable
 
   def alphabet_index
     alphabet_with_index = {}
-    alphabet.to_enum.with_index do |letter, index|
+    alphabet.each.with_index do |letter, index|
       alphabet_with_index[letter] = index
     end
     alphabet_with_index

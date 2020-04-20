@@ -87,7 +87,7 @@ class EncryptionTest < Minitest::Test
     assert_equal ({ :a => 3, :b => 27, :c => 73, :d => 20}), encrypt.shifts_pairs
   end
 
-  def test_it_can_generate_hash_with_starting_indexes_for_encrypt_method
+  def test_it_can_set_indexes_for_encrypt_message
     encrypt = Encryption.new("Hello World", "02715", "040895")
     assert_equal ({ :a => 0, :b => 1, :c => 2, :d => 3}), encrypt.indexes
   end
